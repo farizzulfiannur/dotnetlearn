@@ -1,3 +1,5 @@
+using api.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -33,6 +35,29 @@ app.UseHttpsRedirection();
 // })
 // .WithName("GetWeatherForecast")
 // .WithOpenApi();
+
+app.MapGet("/test-stock", () =>
+{
+    var stock = new Stock();
+    stock.Comments.Add (new Comment
+    {
+        Id = 0,
+        Title = "Dasar Pemrograman",
+        Content = "Ini merupakan Content Pertama Dasar Pemrograman"
+    });
+    stock.Comments.Add (new Comment
+    {
+        Id = 1,
+        Title = "Dasar Pemrograman",
+        Content = "Ini merupakan Content Kedua Dasar Pemrograman"
+    });
+
+    return stock.Comments;
+    // return new
+    // {
+    //     CommentTitle1 = stock.Comments[0].Title
+    // };
+});
 
 app.Run();
 
